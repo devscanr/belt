@@ -1,0 +1,12 @@
+{
+  "name": "belt",
+  "module": "src/index.ts",
+  "devDependencies": {
+    "@types/bun": "latest"
+  },
+  "type": "module",
+  "dependencies": {
+    "@mobily/ts-belt": "^4.0.0-rc.5",
+    "typescript": "^5.5.4"
+  }
+}
