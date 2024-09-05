@@ -13,7 +13,7 @@ export function modes<X>(xs: X[]): X[] {
     }
   }
   if (occurences.size >= 2) {
-    const [topXs] = [...occurences.entries()].reduce(([zks, zv], [k, v]) => {
+    let [topXs] = [...occurences.entries()].reduce(([zks, zv], [k, v]) => {
       if (v > zv) {
         return [[k], v]
       }
@@ -52,7 +52,7 @@ export function groupBy(arg1: any, arg2?: any) {
     return pipe(
       A.groupBy(arg1, arg2),
       D.map(F.toMutable),
-    ) as any
+    )
   } else if (arguments.length == 1) {
     return flippedGroupBy.bind(null, arg1)
   } else {
@@ -88,7 +88,7 @@ export function concatCappedRight<T>(n: number, xs1: T[], xs2: T[]): T[] {
 }
 
 export function splitInTwo<T>(xs: T[]): [T[], T[]] | undefined {
-  const r = A.splitAt(xs, Math.ceil(xs.length / 2))
+  let r = A.splitAt(xs, Math.ceil(xs.length / 2))
   return r ? F.toMutable(r) : undefined
 }
 
@@ -145,68 +145,68 @@ export function transpose2d(array2d: string[][]): string[][] {
     [bar3],       // third order results
   ]
   */
-  const maxN = max(array2d.map(row => row.length)) || 0
-  const matrix = array2d.map(row =>
+  let maxN = max(array2d.map(row => row.length)) || 0
+  let matrix = array2d.map(row =>
     row.length == maxN
       ? row
       : [...row, ...range(0, maxN - row.length - 1).map(() => undefined)]
   )
-  const matrixTransposed = matrix[0].map((col, i) => matrix.map(row => row[i]))
+  let matrixTransposed = matrix[0].map((col, i) => matrix.map(row => row[i]))
   return matrixTransposed.map(row => row.filter((item): item is string => item != undefined))
 }
 
 export function splitAt<A>(xs: A[], offset: number): [A[], A[]] {
-  const r = A.splitAt(xs, offset)    // original impl. returns `undefined` for out-of-bound indexes
+  let r = A.splitAt(xs, offset)    // original impl. returns `undefined` for out-of-bound indexes
   return r ? [r[0], r[1]] : [xs, []] // currying is lost, we're waiting for the pipe (|>) operator to make it unnecessary
 }
 
-export const append = A.append
-export const concat = A.concat
-export const difference = A.difference
-export const drop = A.drop
+export let append = A.append
+export let concat = A.concat
+export let difference = A.difference
+export let drop = A.drop
 export function dropWhile<X>(xs: X[], predicate: (x: X) => boolean): X[] {
-  for (const [i, x] of xs.entries()) {
+  for (let [i, x] of xs.entries()) {
     if (!predicate(x)) {
       return xs.slice(i)
     }
   }
   return []
 }
-export const filter = A.filter
-export const find = A.find
-export const flat = A.flat
-export const flatMap = A.flatMap
-export const head = A.head
-export const includes = A.includes
-export const intersection = A.intersection
-export const isEmpty = A.isEmpty
-export const isNotEmpty = A.isNotEmpty
-export const join = A.join
-export const last = A.last
-export const map = A.map
-export const mapWithIndex = A.mapWithIndex
-export const partition = A.partition
-export const prepend = A.prepend
-export const range = A.range
-export const rangeBy = A.rangeBy
-export const reduce = A.reduce
-export const reject = A.reject
-export const removeAt = A.removeAt
-export const removeFirst = A.removeFirst
-// export const removeFirstBy = A.removeFirstBy // stupid interface, don't use
-export const repeat = A.repeat
+export let filter = A.filter
+export let find = A.find
+export let flat = A.flat
+export let flatMap = A.flatMap
+export let head = A.head
+export let includes = A.includes
+export let intersection = A.intersection
+export let isEmpty = A.isEmpty
+export let isNotEmpty = A.isNotEmpty
+export let join = A.join
+export let last = A.last
+export let map = A.map
+export let mapWithIndex = A.mapWithIndex
+export let partition = A.partition
+export let prepend = A.prepend
+export let range = A.range
+export let rangeBy = A.rangeBy
+export let reduce = A.reduce
+export let reject = A.reject
+export let removeAt = A.removeAt
+export let removeFirst = A.removeFirst
+// export let removeFirstBy = A.removeFirstBy // stupid interface, don't use
+export let repeat = A.repeat
 export function replace<X>(xs: X[], fromX: X, toX: X): X[] {
   return xs.map(x => x === fromX ? toX : x)
 }
-export const reverse = A.reverse
-export const shuffle = A.shuffle
-export const sort = A.sort
-export const sortBy = A.sortBy
-export const splitEvery = A.splitEvery
-export const take = A.take
-export const takeWhile = A.takeWhile
-export const uniq = A.uniq
-export const uniqBy = A.uniqBy
-export const zip = A.zip
-export const zipWith = A.zipWith
-export const zipWithIndex = A.zipWithIndex
+export let reverse = A.reverse
+export let shuffle = A.shuffle
+export let sort = A.sort
+export let sortBy = A.sortBy
+export let splitEvery = A.splitEvery
+export let take = A.take
+export let takeWhile = A.takeWhile
+export let uniq = A.uniq
+export let uniqBy = A.uniqBy
+export let zip = A.zip
+export let zipWith = A.zipWith
+export let zipWithIndex = A.zipWithIndex

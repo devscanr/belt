@@ -5,5 +5,4 @@
 //     expect(capitalize("test")).toMatch("Test")
 //   })
 // })
-
-export {}
+export {};

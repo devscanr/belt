@@ -1,13 +1,18 @@
 {
   "name": "belt",
-  "main": "src/index.ts",
-  "module": "src/index.ts",
-  "devDependencies": {
-    "@types/bun": "latest"
-  },
+  "main": "dist/index.js",
+  "module": "dist/index.js",
+  "types": "dist/index.d.ts",
   "type": "module",
-  "dependencies": {
-    "@mobily/ts-belt": "^4.0.0-rc.5",
+  "scripts": {
+    "check": "tsc",
+    "build": "tsc --noEmit false"
+  },
+  "devDependencies": {
+    "@types/bun": "latest",
     "typescript": "^5.5.4"
+  },
+  "dependencies": {
+    "@mobily/ts-belt": "^4.0.0-rc.5"
   }
 }

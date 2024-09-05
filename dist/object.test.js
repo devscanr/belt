@@ -17,5 +17,4 @@
 //     expect(isPlainObject(new Test())).toBe(false)
 //   })
 // })
-
-export {}
+export {};

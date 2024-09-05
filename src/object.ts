@@ -49,9 +49,10 @@ export let merge = D.merge
 export let selectKeys = D.selectKeys
 export let toPairs = D.toPairs
 
-export function values<T extends string | number, R>(dict: Record<T, R> | {[k in T]?: R}): Array<R> {
-  return D.values(dict as any)
-}
+export let values = D.values
+// export function values<T extends string | number, R>(dict: Record<T, R> | {[k in T]?: R}): Array<R> {
+//   return D.values(dict as any)
+// }
 
 export function fromZip<T>(keys: string[], data: T[]): Dict<T> {
   return D.fromPairs(A.zip(keys, data))

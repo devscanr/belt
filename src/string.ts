@@ -43,16 +43,16 @@ export function isUppercase(str: string): boolean {
 //   return str || undefined
 // }
 
-export const isEmpty = S.isEmpty
-export const isNotEmpty = S.isNotEmpty
-export const isNotEmptyOrUndefined = <S extends string>(s: S | undefined): s is S => !!s
-export const replace = S.replace
-export const replaceAll = S.replaceAll
-export const replaceByRe = S.replaceByRe
-export const slice = S.slice
-export const sliceToEnd = S.sliceToEnd
-export const split = S.split
-export const splitByRe = S.splitByRe
-export const trim = S.trim
-export const toLowerCase = S.toLowerCase
-export const toUpperCase = S.toUpperCase
+export let isEmpty = S.isEmpty
+export let isNotEmpty = S.isNotEmpty
+export let isNotEmptyOrUndefined = <S extends string>(s: S | undefined): s is S => !!s
+export let replace = S.replace
+export let replaceAll = S.replaceAll
+export let replaceByRe = S.replaceByRe
+export let slice = S.slice
+export let sliceToEnd = S.sliceToEnd
+export let split = S.split
+export let splitByRe = S.splitByRe
+export let trim = S.trim
+export let toLowerCase = S.toLowerCase
+export let toUpperCase = S.toUpperCase
