@@ -7,6 +7,15 @@ export function sumBy(xs, byFn) {
 export function asPercent(ratio) {
     return Math.round(ratio * 100) + "%";
 }
+export function clamp(min, max) {
+    return function (n) {
+        return Math.min(Math.max(n, min), max);
+    };
+}
+// for FE where we cannot use faker
+export function randomInt(min, max) {
+    return Math.floor(Math.random() * (max - min + 1) + min);
+}
 // Not sure if necessary to have both parseIntUndefined and parseFloatUndefined:
 // given that JS knows only `number`. If we need an int – just remove the decimal part.
 // Not clear how `parseInt` should translate decimal strings anyway: drop, round, error, etc...

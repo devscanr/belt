@@ -3,6 +3,48 @@
   "main": "dist/index.js",
   "module": "dist/index.js",
   "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "dist/index.d.ts",
+      "default": "./dist/index.js"
+    },
+    "./array": {
+      "types": "dist/array.d.ts",
+      "default": "./dist/array.js"
+    },
+    "./async": {
+      "types": "dist/async.d.ts",
+      "default": "./dist/async.js"
+    },
+    "./datetime": {
+      "types": "dist/datetime.d.ts",
+      "default": "./dist/datetime.js"
+    },
+    "./function": {
+      "types": "dist/function.d.ts",
+      "default": "./dist/function.js"
+    },
+    "./generator": {
+      "types": "dist/generator.d.ts",
+      "default": "./dist/generator.js"
+    },
+    "./number": {
+      "types": "dist/number.d.ts",
+      "default": "./dist/number.js"
+    },
+    "./object": {
+      "types": "dist/object.d.ts",
+      "default": "./dist/object.js"
+    },
+    "./set": {
+      "types": "dist/set.d.ts",
+      "default": "./dist/set.js"
+    },
+    "./string": {
+      "types": "dist/string.d.ts",
+      "default": "./dist/string.js"
+    }
+  },
   "type": "module",
   "scripts": {
     "check": "tsc",
