@@ -1,4 +1,17 @@
-import {A, pipe, S} from "@mobily/ts-belt"
+export {
+  isEmpty,
+  isNotEmpty,
+  replace,
+  replaceAll,
+  replaceByRe,
+  slice,
+  sliceToEnd,
+  split,
+  splitByRe,
+  trim,
+  toLowerCase,
+  toUpperCase
+} from "@mobily/ts-belt/String"
 
 export function trimSlashes(str: string): string {
   return str.replace(/^\//, "").replace(/\/$/, "")
@@ -10,15 +23,14 @@ export function capitalize(str: string): string {
 }
 
 export function capitalizeEachWord(str: string): string {
-  return pipe(str,
-    S.split(" "),
-    A.map(capitalize),
-    A.join(" "),
-  )
+  return str
+    .split(" ")
+    .map(capitalize)
+    .join(" ")
 }
 
-export function isCapitalized (str: string) {
-  return str && (str[0] == str[0].toUpperCase())
+export function isCapitalized(str: string): boolean {
+  return str ? (str[0] == str[0].toUpperCase()) : false
 }
 
 export function trimAndLower(str: string): string {
@@ -43,16 +55,4 @@ export function isUppercase(str: string): boolean {
 //   return str || undefined
 // }
 
-export let isEmpty = S.isEmpty
-export let isNotEmpty = S.isNotEmpty
 export let isNotEmptyOrUndefined = <S extends string>(s: S | undefined): s is S => !!s
-export let replace = S.replace
-export let replaceAll = S.replaceAll
-export let replaceByRe = S.replaceByRe
-export let slice = S.slice
-export let sliceToEnd = S.sliceToEnd
-export let split = S.split
-export let splitByRe = S.splitByRe
-export let trim = S.trim
-export let toLowerCase = S.toLowerCase
-export let toUpperCase = S.toUpperCase

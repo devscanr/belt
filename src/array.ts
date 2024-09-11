@@ -1,4 +1,51 @@
-import {A, D, F, pipe} from "@mobily/ts-belt"
+import {
+  groupBy as A_groupBy,
+  range as A_range,
+  reverse as A_reverse,
+  splitAt as A_splitAt,
+  uniqBy as A_uniqBy
+} from "@mobily/ts-belt/Array"
+
+export {
+  append,
+  concat,
+  difference,
+  drop,
+  filter,
+  find,
+  flat,
+  flatMap,
+  head,
+  includes,
+  intersection,
+  isEmpty,
+  isNotEmpty,
+  join,
+  last,
+  map,
+  mapWithIndex,
+  partition,
+  prepend,
+  range,
+  rangeBy,
+  reduce,
+  reject,
+  removeAt,
+  removeFirst,
+  repeat,
+  reverse,
+  shuffle,
+  sort,
+  sortBy,
+  splitEvery,
+  take,
+  takeWhile,
+  uniq,
+  uniqBy,
+  zip,
+  zipWith,
+  zipWithIndex
+} from "@mobily/ts-belt/Array"
 
 export let Tuple = <T extends [any, ...any]>(v: T): T => v
 
@@ -39,20 +86,12 @@ export function recombine<X, Y>(xs: X[], ys: Y[]): [X, Y][] {
   })
 }
 
-export function append_<T>(xs: T[], x: T): T[] {
-  xs.push(x)
-  return xs
-}
-
 // Until `UseMutableDict` (see `UseMutableArrays`) is supported by TS-Belt
 export function groupBy<A>(xs: Array<A>, groupFn: (item: A) => PropertyKey): Record<PropertyKey, [A, ...A[]]>
 export function groupBy<A>(groupFn: (item: A) => PropertyKey): (xs: Array<A>) => Record<PropertyKey, [A, ...A[]]>
 export function groupBy(arg1: any, arg2?: any) {
   if (arguments.length == 2) {
-    return pipe(
-      A.groupBy(arg1, arg2),
-      D.map(F.toMutable),
-    )
+    return A_groupBy(arg1, arg2)
   } else if (arguments.length == 1) {
     return flippedGroupBy.bind(null, arg1)
   } else {
@@ -61,14 +100,11 @@ export function groupBy(arg1: any, arg2?: any) {
 }
 
 function flippedGroupBy<A>(groupFn: (item: A) => PropertyKey, xs: Array<A>) {
-  return pipe(
-    A.groupBy(xs, groupFn),
-    D.map(F.toMutable),
-  )
+  return A_groupBy(xs, groupFn)
 }
 
 export function splitBy<T, K extends PropertyKey>(xs: T[], fn: (x: T) => K): T[][] {
-  return D.values(groupBy(xs, fn))
+  return Object.values(groupBy(xs, fn))
 }
 
 export function reduce1<X>(xs: X[], fn: (z: X, x: X) => X): X {
@@ -88,17 +124,12 @@ export function concatCappedRight<T>(n: number, xs1: T[], xs2: T[]): T[] {
 }
 
 export function splitInTwo<T>(xs: T[]): [T[], T[]] | undefined {
-  let r = A.splitAt(xs, Math.ceil(xs.length / 2))
-  return r ? F.toMutable(r) : undefined
+  let r = A_splitAt(xs, Math.ceil(xs.length / 2))
+  return r ? r as [T[], T[]] : undefined
 }
 
 export function uniqByLatest<X>(xs: X[], uniqFn: (x: X) => string): X[] {
-  return pipe(
-    xs,
-    A.reverse,
-    A.uniqBy(uniqFn),
-    A.reverse
-  )
+  return A_reverse(A_uniqBy(A_reverse(xs), uniqFn))
 }
 
 export function min<T extends string | number>(xs: T[]): T | undefined {
@@ -149,21 +180,17 @@ export function transpose2d(array2d: string[][]): string[][] {
   let matrix = array2d.map(row =>
     row.length == maxN
       ? row
-      : [...row, ...range(0, maxN - row.length - 1).map(() => undefined)]
+      : [...row, ...A_range(0, maxN - row.length - 1).map(() => undefined)]
   )
   let matrixTransposed = matrix[0].map((col, i) => matrix.map(row => row[i]))
   return matrixTransposed.map(row => row.filter((item): item is string => item != undefined))
 }
 
 export function splitAt<A>(xs: A[], offset: number): [A[], A[]] {
-  let r = A.splitAt(xs, offset)    // original impl. returns `undefined` for out-of-bound indexes
+  let r = A_splitAt(xs, offset)    // original impl. returns `undefined` for out-of-bound indexes
   return r ? [r[0], r[1]] : [xs, []] // currying is lost, we're waiting for the pipe (|>) operator to make it unnecessary
 }
 
-export let append = A.append
-export let concat = A.concat
-export let difference = A.difference
-export let drop = A.drop
 export function dropWhile<X>(xs: X[], predicate: (x: X) => boolean): X[] {
   for (let [i, x] of xs.entries()) {
     if (!predicate(x)) {
@@ -172,41 +199,8 @@ export function dropWhile<X>(xs: X[], predicate: (x: X) => boolean): X[] {
   }
   return []
 }
-export let filter = A.filter
-export let find = A.find
-export let flat = A.flat
-export let flatMap = A.flatMap
-export let head = A.head
-export let includes = A.includes
-export let intersection = A.intersection
-export let isEmpty = A.isEmpty
-export let isNotEmpty = A.isNotEmpty
-export let join = A.join
-export let last = A.last
-export let map = A.map
-export let mapWithIndex = A.mapWithIndex
-export let partition = A.partition
-export let prepend = A.prepend
-export let range = A.range
-export let rangeBy = A.rangeBy
-export let reduce = A.reduce
-export let reject = A.reject
-export let removeAt = A.removeAt
-export let removeFirst = A.removeFirst
-// export let removeFirstBy = A.removeFirstBy // stupid interface, don't use
-export let repeat = A.repeat
+
 export function replace<X>(xs: X[], fromX: X, toX: X): X[] {
   return xs.map(x => x === fromX ? toX : x)
 }
-export let reverse = A.reverse
-export let shuffle = A.shuffle
-export let sort = A.sort
-export let sortBy = A.sortBy
-export let splitEvery = A.splitEvery
-export let take = A.take
-export let takeWhile = A.takeWhile
-export let uniq = A.uniq
-export let uniqBy = A.uniqBy
-export let zip = A.zip
-export let zipWith = A.zipWith
-export let zipWithIndex = A.zipWithIndex
+

@@ -1,3 +1,1 @@
-import { F } from "@mobily/ts-belt";
-export { pipe } from "@mobily/ts-belt";
-export declare let equals: typeof F.equals;
+export { equals, identity } from "@mobily/ts-belt/Function";

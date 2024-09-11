@@ -12,7 +12,7 @@ export function clamp(min, max) {
         return Math.min(Math.max(n, min), max);
     };
 }
-// for FE where we cannot use faker
+// for FE where we cannot use Faker
 export function randomInt(min, max) {
     return Math.floor(Math.random() * (max - min + 1) + min);
 }

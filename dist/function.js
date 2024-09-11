@@ -1,3 +1,1 @@
-import { F } from "@mobily/ts-belt";
-export { pipe } from "@mobily/ts-belt";
-export let equals = F.equals;
+export { equals, identity } from "@mobily/ts-belt/Function";

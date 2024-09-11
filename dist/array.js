@@ -1,4 +1,5 @@
-import { A, D, F, pipe } from "@mobily/ts-belt";
+import { groupBy as A_groupBy, range as A_range, reverse as A_reverse, splitAt as A_splitAt, uniqBy as A_uniqBy } from "@mobily/ts-belt/Array";
+export { append, concat, difference, drop, filter, find, flat, flatMap, head, includes, intersection, isEmpty, isNotEmpty, join, last, map, mapWithIndex, partition, prepend, range, rangeBy, reduce, reject, removeAt, removeFirst, repeat, reverse, shuffle, sort, sortBy, splitEvery, take, takeWhile, uniq, uniqBy, zip, zipWith, zipWithIndex } from "@mobily/ts-belt/Array";
 export let Tuple = (v) => v;
 // Return the most often repeated value(s)
 export function modes(xs) {
@@ -38,13 +39,9 @@ export function recombine(xs, ys) {
         });
     });
 }
-export function append_(xs, x) {
-    xs.push(x);
-    return xs;
-}
 export function groupBy(arg1, arg2) {
     if (arguments.length == 2) {
-        return pipe(A.groupBy(arg1, arg2), D.map(F.toMutable));
+        return A_groupBy(arg1, arg2);
     }
     else if (arguments.length == 1) {
         return flippedGroupBy.bind(null, arg1);
@@ -54,10 +51,10 @@ export function groupBy(arg1, arg2) {
     }
 }
 function flippedGroupBy(groupFn, xs) {
-    return pipe(A.groupBy(xs, groupFn), D.map(F.toMutable));
+    return A_groupBy(xs, groupFn);
 }
 export function splitBy(xs, fn) {
-    return D.values(groupBy(xs, fn));
+    return Object.values(groupBy(xs, fn));
 }
 export function reduce1(xs, fn) {
     if (!xs.length) {
@@ -73,11 +70,11 @@ export function concatCappedRight(n, xs1, xs2) {
     return xs1.concat(xs2).slice(0, n);
 }
 export function splitInTwo(xs) {
-    let r = A.splitAt(xs, Math.ceil(xs.length / 2));
-    return r ? F.toMutable(r) : undefined;
+    let r = A_splitAt(xs, Math.ceil(xs.length / 2));
+    return r ? r : undefined;
 }
 export function uniqByLatest(xs, uniqFn) {
-    return pipe(xs, A.reverse, A.uniqBy(uniqFn), A.reverse);
+    return A_reverse(A_uniqBy(A_reverse(xs), uniqFn));
 }
 export function min(xs) {
     if (!xs.length) {
@@ -124,18 +121,14 @@ export function transpose2d(array2d) {
     let maxN = max(array2d.map(row => row.length)) || 0;
     let matrix = array2d.map(row => row.length == maxN
         ? row
-        : [...row, ...range(0, maxN - row.length - 1).map(() => undefined)]);
+        : [...row, ...A_range(0, maxN - row.length - 1).map(() => undefined)]);
     let matrixTransposed = matrix[0].map((col, i) => matrix.map(row => row[i]));
     return matrixTransposed.map(row => row.filter((item) => item != undefined));
 }
 export function splitAt(xs, offset) {
-    let r = A.splitAt(xs, offset); // original impl. returns `undefined` for out-of-bound indexes
+    let r = A_splitAt(xs, offset); // original impl. returns `undefined` for out-of-bound indexes
     return r ? [r[0], r[1]] : [xs, []]; // currying is lost, we're waiting for the pipe (|>) operator to make it unnecessary
 }
-export let append = A.append;
-export let concat = A.concat;
-export let difference = A.difference;
-export let drop = A.drop;
 export function dropWhile(xs, predicate) {
     for (let [i, x] of xs.entries()) {
         if (!predicate(x)) {
@@ -144,41 +137,6 @@ export function dropWhile(xs, predicate) {
     }
     return [];
 }
-export let filter = A.filter;
-export let find = A.find;
-export let flat = A.flat;
-export let flatMap = A.flatMap;
-export let head = A.head;
-export let includes = A.includes;
-export let intersection = A.intersection;
-export let isEmpty = A.isEmpty;
-export let isNotEmpty = A.isNotEmpty;
-export let join = A.join;
-export let last = A.last;
-export let map = A.map;
-export let mapWithIndex = A.mapWithIndex;
-export let partition = A.partition;
-export let prepend = A.prepend;
-export let range = A.range;
-export let rangeBy = A.rangeBy;
-export let reduce = A.reduce;
-export let reject = A.reject;
-export let removeAt = A.removeAt;
-export let removeFirst = A.removeFirst;
-// export let removeFirstBy = A.removeFirstBy // stupid interface, don't use
-export let repeat = A.repeat;
 export function replace(xs, fromX, toX) {
     return xs.map(x => x === fromX ? toX : x);
 }
-export let reverse = A.reverse;
-export let shuffle = A.shuffle;
-export let sort = A.sort;
-export let sortBy = A.sortBy;
-export let splitEvery = A.splitEvery;
-export let take = A.take;
-export let takeWhile = A.takeWhile;
-export let uniq = A.uniq;
-export let uniqBy = A.uniqBy;
-export let zip = A.zip;
-export let zipWith = A.zipWith;
-export let zipWithIndex = A.zipWithIndex;

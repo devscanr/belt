@@ -3,7 +3,7 @@
 
 // export {parseDate}
 
-export let ISO_REGEX = /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(\.\d+)?Z$/
+export const ISO_REGEX: RegExp = /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(\.\d+)?Z$/
 
 export function isIsoString(str: string): boolean {
   return ISO_REGEX.test(str)

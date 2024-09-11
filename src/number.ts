@@ -16,8 +16,8 @@ export function clamp(min: number, max: number) {
   }
 }
 
-// for FE where we cannot use faker
-export function randomInt(min: number, max: number) {
+// for FE where we cannot use Faker
+export function randomInt(min: number, max: number): number {
   return Math.floor(Math.random() * (max - min + 1) + min)
 }
 

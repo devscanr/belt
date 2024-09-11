@@ -1,3 +1,5 @@
+export {pipe} from "@mobily/ts-belt"
+
 export * as A from "./array"
 export * as AS from "./async"
 export * as T from "./datetime"

@@ -1,4 +1,7 @@
-import { A, D } from "@mobily/ts-belt";
+import { zip as A_zip } from "@mobily/ts-belt/Array";
+import { fromPairs as D_fromPairs } from "@mobily/ts-belt/Dict";
+export { deleteKey, deleteKeys, isEmpty, isNotEmpty, filter, fromPairs, // Note: had a problem with this function, solved by passing explicit type in generic -- D.fromPairs<User, string>(..)
+get, getUnsafe, keys, map, mapWithKey, merge, selectKeys, toPairs, values } from "@mobily/ts-belt/Dict";
 export function isPlainObject(obj) {
     function isObject(obj) {
         return Object.prototype.toString.call(obj) == "[object Object]";
@@ -24,28 +27,13 @@ export function isPlainObject(obj) {
     return true;
 }
 export function size(obj) {
-    return D.keys(obj).length;
+    return Object.keys(obj).length;
 }
-export let deleteKey = D.deleteKey;
-export let deleteKeys = D.deleteKeys;
-export let isEmpty = D.isEmpty;
-export let isNotEmpty = D.isNotEmpty;
-export let filter = D.filter;
-export let fromPairs = D.fromPairs; // Note: had a problem with this function, solved by passing explicit type in generic -- D.fromPairs<User, string>(..)
-export let get = D.get;
-export let getUnsafe = D.getUnsafe;
-export let keys = D.keys;
-export let map = D.map;
-export let mapWithKey = D.mapWithKey;
-export let merge = D.merge;
-export let selectKeys = D.selectKeys;
-export let toPairs = D.toPairs;
-export let values = D.values;
 // export function values<T extends string | number, R>(dict: Record<T, R> | {[k in T]?: R}): Array<R> {
 //   return D.values(dict as any)
 // }
 export function fromZip(keys, data) {
-    return D.fromPairs(A.zip(keys, data));
+    return D_fromPairs(A_zip(keys, data));
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 export function deepEqual(object1, object2) {
