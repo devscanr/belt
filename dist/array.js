@@ -1,5 +1,5 @@
-import { groupBy as A_groupBy, range as A_range, reverse as A_reverse, splitAt as A_splitAt, uniqBy as A_uniqBy } from "@mobily/ts-belt/Array";
-export { append, concat, difference, drop, filter, find, flat, flatMap, head, includes, intersection, isEmpty, isNotEmpty, join, last, map, mapWithIndex, partition, prepend, range, rangeBy, reduce, reject, removeAt, removeFirst, repeat, reverse, shuffle, sort, sortBy, splitEvery, take, takeWhile, uniq, uniqBy, zip, zipWith, zipWithIndex } from "@mobily/ts-belt/Array";
+import { groupBy as A_groupBy, range as A_range, splitAt as A_splitAt, uniqBy as A_uniqBy } from "@mobily/ts-belt/Array";
+export { append, concat, difference, drop, filter, find, flat, flatMap, head, includes, intersection, isEmpty, isNotEmpty, join, last, map, mapWithIndex, partition, prepend, range, rangeBy, reduce, reject, removeAt, removeFirst, repeat, shuffle, sort, sortBy, splitEvery, take, takeWhile, uniq, uniqBy, zip, zipWith, zipWithIndex } from "@mobily/ts-belt/Array";
 export let Tuple = (v) => v;
 // Return the most often repeated value(s)
 export function modes(xs) {
@@ -74,7 +74,7 @@ export function splitInTwo(xs) {
     return r ? r : undefined;
 }
 export function uniqByLatest(xs, uniqFn) {
-    return A_reverse(A_uniqBy(A_reverse(xs), uniqFn));
+    return A_uniqBy(xs.toReversed(), uniqFn).toReversed();
 }
 export function min(xs) {
     if (!xs.length) {

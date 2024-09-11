@@ -1,7 +1,6 @@
 import {
   groupBy as A_groupBy,
   range as A_range,
-  reverse as A_reverse,
   splitAt as A_splitAt,
   uniqBy as A_uniqBy
 } from "@mobily/ts-belt/Array"
@@ -33,7 +32,6 @@ export {
   removeAt,
   removeFirst,
   repeat,
-  reverse,
   shuffle,
   sort,
   sortBy,
@@ -129,7 +127,7 @@ export function splitInTwo<T>(xs: T[]): [T[], T[]] | undefined {
 }
 
 export function uniqByLatest<X>(xs: X[], uniqFn: (x: X) => string): X[] {
-  return A_reverse(A_uniqBy(A_reverse(xs), uniqFn))
+  return A_uniqBy(xs.toReversed(), uniqFn).toReversed()
 }
 
 export function min<T extends string | number>(xs: T[]): T | undefined {
