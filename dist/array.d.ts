@@ -1,4 +1,4 @@
-export { append, concat, difference, drop, filter, find, flat, flatMap, head, includes, intersection, isEmpty, isNotEmpty, join, last, map, mapWithIndex, partition, prepend, range, rangeBy, reduce, reject, removeAt, removeFirst, repeat, shuffle, sort, sortBy, splitEvery, take, takeWhile, uniq, uniqBy, zip, zipWith, zipWithIndex } from "@mobily/ts-belt/Array";
+export { append, concat, difference, drop, find, head, includes, intersection, isEmpty, isNotEmpty, join, last, mapWithIndex, partition, prepend, range, rangeBy, reject, removeAt, removeFirst, repeat, shuffle, sort, sortBy, splitEvery, take, takeWhile, uniq, uniqBy, zip, zipWith, zipWithIndex } from "@mobily/ts-belt/Array";
 export declare let Tuple: <T extends [any, ...any]>(v: T) => T;
 export declare function modes<X>(xs: X[]): X[];
 export declare function recombine<X, Y>(xs: X[], ys: Y[]): [X, Y][];

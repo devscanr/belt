@@ -1,5 +1,5 @@
 import { groupBy as A_groupBy, range as A_range, splitAt as A_splitAt, uniqBy as A_uniqBy } from "@mobily/ts-belt/Array";
-export { append, concat, difference, drop, filter, find, flat, flatMap, head, includes, intersection, isEmpty, isNotEmpty, join, last, map, mapWithIndex, partition, prepend, range, rangeBy, reduce, reject, removeAt, removeFirst, repeat, shuffle, sort, sortBy, splitEvery, take, takeWhile, uniq, uniqBy, zip, zipWith, zipWithIndex } from "@mobily/ts-belt/Array";
+export { append, concat, difference, drop, find, head, includes, intersection, isEmpty, isNotEmpty, join, last, mapWithIndex, partition, prepend, range, rangeBy, reject, removeAt, removeFirst, repeat, shuffle, sort, sortBy, splitEvery, take, takeWhile, uniq, uniqBy, zip, zipWith, zipWithIndex } from "@mobily/ts-belt/Array";
 export let Tuple = (v) => v;
 // Return the most often repeated value(s)
 export function modes(xs) {

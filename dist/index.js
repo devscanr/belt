@@ -1,7 +1,6 @@
 export { pipe } from "@mobily/ts-belt";
 export * as A from "./array";
 export * as AS from "./async";
-export * as T from "./datetime";
 export * as F from "./function";
 export * as G from "./generator";
 export * as N from "./number";
